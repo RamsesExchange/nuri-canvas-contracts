@@ -1,11 +1,10 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity ^0.8.20;
+pragma solidity 0.8.19;
 
 import {Attestation} from "@eas/contracts/IEAS.sol";
 
 import {ScrollBadge} from "./ScrollBadge.sol";
-import {ScrollBadgePermissionless} from "./examples/ScrollBadgePermissionless.sol";
 import {ScrollBadgeEligibilityCheck} from "./extensions/ScrollBadgeEligibilityCheck.sol";
 import {Unauthorized} from "../Errors.sol";
 
@@ -13,7 +12,7 @@ import {IVotingEscrow} from "../interfaces/IVotingEscrow.sol";
 
 /// @title NuriBadge
 /// @notice A badge that shows that the user has a veNFT with Nuri locked
-contract NuriBadge is ScrollBadgePermissionless {
+contract NuriBadge is ScrollBadgeEligibilityCheck {
     /// @notice veNFT contract
     IVotingEscrow public ve;
     /// @notice minimum veNURI lock to be eligible
@@ -22,8 +21,9 @@ contract NuriBadge is ScrollBadgePermissionless {
     mapping(uint256 id => bool _used) internal basicSybilCheck;
 
     /// @notice badge uri
-    string public immutable defaultBadgeURI;
-    constructor(address resolver_, address _ve, string memory _baseURI) ScrollBadgePermissionless(resolver_) {
+    string public defaultBadgeURI;
+
+    constructor(address resolver_, address _ve, string memory _baseURI) ScrollBadge(resolver_) {
         ve = IVotingEscrow(_ve);
         defaultBadgeURI = _baseURI;
     }
@@ -67,7 +67,7 @@ contract NuriBadge is ScrollBadgePermissionless {
     /// @notice Returns the token URI corresponding to a certain badge UID.
     /// @param uid The badge UID.
     /// @return The badge token URI (same format as ERC721).
-    function getBadgeTokenURI(bytes32 uid) internal view virtual returns (string memory);
+    function getBadgeTokenURI(bytes32 uid) internal view virtual returns (string memory) {}
 
     /// @inheritdoc ScrollBadgeEligibilityCheck
     function isEligible(address recipient) external view override returns (bool) {
@@ -91,7 +91,7 @@ contract NuriBadge is ScrollBadgePermissionless {
     function _balanceOfLocked(uint256 _id) internal view returns (uint256) {
         (uint256 amount, uint256 unlockTime) = ve.locked(_id);
         /// @dev if the unlock time is longer than 3 years (out of 4 max), return the amount- else return 0
-        if (unlockTime >= block.timestamp + 3 years) return amount;
+        if (unlockTime >= block.timestamp + (4 * 365 * 86400)) return amount;
         return 0;
     }
 
@@ -99,7 +99,7 @@ contract NuriBadge is ScrollBadgePermissionless {
     function _largestPosition(address _recipient) internal view returns (uint256) {
         uint256 largestID = 0;
         for (uint256 i = 0; i < ve.balanceOf(_recipient); ++i) {
-            uint256 _id = ve.tokenOfOwnerByIndex(recipient, i);
+            uint256 _id = ve.tokenOfOwnerByIndex(_recipient, i);
             /// @dev ternary operator for updating the largestID
             _balanceOfLocked(_id) > _balanceOfLocked(largestID) ? largestID = _id : largestID = largestID;
         }
