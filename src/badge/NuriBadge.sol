@@ -91,7 +91,7 @@ contract NuriBadge is ScrollBadgeEligibilityCheck {
     function _balanceOfLocked(uint256 _id) internal view returns (uint256) {
         (uint256 amount, uint256 unlockTime) = ve.locked(_id);
         /// @dev if the unlock time is longer than 3 years (out of 4 max), return the amount- else return 0
-        if (unlockTime >= block.timestamp + (4 * 365 * 86400)) return amount;
+        if (unlockTime >= block.timestamp + (3 * 365 * 86400)) return amount;
         return 0;
     }
 
