@@ -12,7 +12,7 @@ import {IVotingEscrow} from "../interfaces/IVotingEscrow.sol";
 
 /// @title NuriBadge
 /// @notice A badge that shows that the user has a veNFT with Nuri locked
-contract NuriBadge is ScrollBadgeEligibilityCheck {
+contract NuriBadge is ScrollBadge, ScrollBadgeEligibilityCheck {
     /// @notice veNFT contract
     IVotingEscrow public ve;
     /// @notice minimum veNURI lock to be eligible
@@ -56,22 +56,10 @@ contract NuriBadge is ScrollBadgeEligibilityCheck {
     }
 
     /// @inheritdoc ScrollBadge
-    function badgeTokenURI(bytes32 uid) public view override returns (string memory) {
-        if (uid == bytes32(0)) {
-            return defaultBadgeURI;
-        }
-
-        return getBadgeTokenURI(uid);
+    function badgeTokenURI(bytes32) public view override returns (string memory) {
+       return defaultBadgeURI;
     }
-
-    /// @notice Returns the token URI corresponding to a certain badge UID.
-    /// @param uid The badge UID.
-    /// @return The badge token URI (same format as ERC721).
-    /// @return token URI is hardcoded to the defaultBadgeURI for this canvas badge
-    function getBadgeTokenURI(bytes32 uid) internal view virtual returns (string memory) {
-        return defaultBadgeURI;
-    }
-
+    
     /// @inheritdoc ScrollBadgeEligibilityCheck
     function isEligible(address recipient) external view override returns (bool) {
         bool mintable = !hasBadge(recipient) && _hasVe(recipient);
