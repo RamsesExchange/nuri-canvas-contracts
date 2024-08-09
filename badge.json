@@ -1,5 +1,5 @@
 {
-    "name": "Nuri Locker Badge",
-    "description": "This badge represents ownership of a veNURI lock on Scroll",
+    "name": "Nuri Locker Badge (10)",
+    "description": "This badge represents ownership of a veNURI lock with at least 10 NURI and a locktime above 3 years",
     "image": "https://raw.githubusercontent.com/RamsesExchange/nuri-canvas-contracts/master/images/nuri-locker-standard-badge.png"
 }
