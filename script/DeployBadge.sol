@@ -11,7 +11,7 @@ contract DeployBadge is Script {
     function run() external {
         vm.startBroadcast(DEPLOYER_PRIVATE_KEY);
         NuriBadge nuriBadge = new NuriBadge(
-            0xf61B5dAe16948F0f1ed9141634E4647bBaAa4A81,
+            0x4560FECd62B14A463bE44D40fE5Cfd595eEc0113,
             0xAAAEa1fB9f3DE3F70E89f37B69Ab11B47eb9Ce6F,
             "https://github.com/RamsesExchange/nuri-canvas-contracts/blob/master/badge.json"
         );
