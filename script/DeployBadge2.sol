@@ -8,7 +8,7 @@ import {NuriBadge200} from "../src/badge/NuriBadge200.sol";
 import {NuriBadge500} from "../src/badge/NuriBadge500.sol";
 import {NuriBadge1000} from "../src/badge/NuriBadge1000.sol";
 import {NuriBadge5000} from "../src/badge/NuriBadge5000.sol";
-import {NuriBadge5000} from "../src/badge/NuriBadge10000.sol";
+import {NuriBadge10000} from "../src/badge/NuriBadge10000.sol";
 
 contract DeployBadge2 is Script {
     uint256 DEPLOYER_PRIVATE_KEY = vm.envUint("DEPLOYER_PRIVATE_KEY");
@@ -50,7 +50,7 @@ contract DeployBadge2 is Script {
         );
         console.log(address(nuriBadge5000));
 
-        NuriBadge1000 nuriBadge10000 = new NuriBadge10000(
+        NuriBadge10000 nuriBadge10000 = new NuriBadge10000(
             0x4560FECd62B14A463bE44D40fE5Cfd595eEc0113,
             0xAAAEa1fB9f3DE3F70E89f37B69Ab11B47eb9Ce6F,
             "https://raw.githubusercontent.com/RamsesExchange/nuri-canvas-contracts/master/images/nuri-locker-10000.png"
