@@ -8,6 +8,7 @@ import {NuriBadge200} from "../src/badge/NuriBadge200.sol";
 import {NuriBadge500} from "../src/badge/NuriBadge500.sol";
 import {NuriBadge1000} from "../src/badge/NuriBadge1000.sol";
 import {NuriBadge5000} from "../src/badge/NuriBadge5000.sol";
+import {NuriBadge5000} from "../src/badge/NuriBadge10000.sol";
 
 contract DeployBadge2 is Script {
     uint256 DEPLOYER_PRIVATE_KEY = vm.envUint("DEPLOYER_PRIVATE_KEY");
