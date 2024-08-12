@@ -12,11 +12,11 @@ import {IVotingEscrow} from "../interfaces/IVotingEscrow.sol";
 
 /// @title NuriBadge
 /// @notice A badge that shows that the user has a veNFT with Nuri locked
-contract NuriBadge is ScrollBadge, ScrollBadgeEligibilityCheck {
+contract NuriBadge500 is ScrollBadge, ScrollBadgeEligibilityCheck {
     /// @notice veNFT contract
     IVotingEscrow public ve;
     /// @notice minimum veNURI lock to be eligible
-    uint256 public constant MIN_LOCK = 10 * 1e18;
+    uint256 public constant MIN_LOCK = 500 * 1e18;
     /// @dev makes it so you can't use the same nft over and over
     mapping(uint256 id => bool _used) internal basicSybilCheck;
 
