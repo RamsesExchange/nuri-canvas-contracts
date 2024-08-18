@@ -32,6 +32,13 @@ contract DeployBadge2 is Script {
             "https://raw.githubusercontent.com/RamsesExchange/nuri-canvas-contracts/master/badge50000.json"
         );
         console.log(address(nuriBadge50000));
+
+            NuriBadge50000 nuriBadge50000animated = new NuriBadge50000(
+            0x4560FECd62B14A463bE44D40fE5Cfd595eEc0113,
+            0xAAAEa1fB9f3DE3F70E89f37B69Ab11B47eb9Ce6F,
+            "https://raw.githubusercontent.com/RamsesExchange/nuri-canvas-contracts/master/badge50000-animated.json"
+        );
+        console.log(address(nuriBadge50000animated));
         vm.stopBroadcast();
     }
 }
