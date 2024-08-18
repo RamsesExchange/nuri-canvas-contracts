@@ -12,7 +12,7 @@ contract DeployLPBadge is Script {
         vm.startBroadcast(DEPLOYER_PRIVATE_KEY);
         NuriNativeLP nurinativelp = new NuriNativeLP(
             0x4560FECd62B14A463bE44D40fE5Cfd595eEc0113,
-            "https://raw.githubusercontent.com/RamsesExchange/nuri-canvas-contracts/master/badge100.json"
+            "https://raw.githubusercontent.com/RamsesExchange/nuri-canvas-contracts/master/badgeNuriETH.json"
         );
         console.log(address(nurinativelp));
 
