@@ -80,6 +80,7 @@ contract NuriNativeLP is ScrollBadge, ScrollBadgeEligibilityCheck {
         uint8 lvlTracker = 0;
         /// @dev lvl 0
         if (balance <= 1 * 1e17) {
+            require(badgeToLevel[_uid] <= lvlTracker);
             badgeToLevel[_uid] = lvlTracker;
             return lvlTracker;
         }
@@ -91,6 +92,7 @@ contract NuriNativeLP is ScrollBadge, ScrollBadgeEligibilityCheck {
         if (balance >= 100 * 1e18) ++lvlTracker;
         /// @dev lvl 4
         if (balance >= 1000 * 1e18) ++lvlTracker;
+        require(badgeToLevel[_uid] < lvlTracker);
         badgeToLevel[_uid] = lvlTracker;
         return lvlTracker;
     }
